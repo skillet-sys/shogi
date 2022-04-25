@@ -1,4 +1,5 @@
 import p5 from 'p5';
+import Peer from 'peerjs';
 import React, { useEffect } from 'react';
 
 const App = () => {
@@ -27,6 +28,11 @@ const P = 1, L = 2, N = 3, S = 4, R = 5, B = 6, G = 7;
 // と:pP 成香:pL 成桂:pN 成銀:pS 竜:pR 馬:pB 王:K 玉:pK
 const pP = 8, pL = 9, pN = 10, pS = 11, pR = 12, pB = 13, K = 14, pK = 15;
 
+let peer: any, conn: any;
+let select: any;
+let players: any[];
+let isSearching = true;
+
 let board: number[][];
 let isMovable: boolean[][];
 let checkedPieces: number[];
@@ -44,6 +50,71 @@ let stocks = Array(2).fill(0).map(() => Array(8).fill(0));
 let stockIndex = 0;
 
 const sketch = (p: p5): void => {
+  const makePeer = () => {
+    let message: any;
+    peer = new Peer(
+      "shogi" + (p as any).shuffle(
+        'abcdefghijklmnopqrstuvwxyz0123456789'.split(''))
+        .slice(0, 7).join(''),
+      {
+        key: '',
+        debug: 3
+      });
+    peer.on('open', () => {
+      message = p.createP(`あなたのID : ${peer.id}`);
+      // message.position();
+      isSearching = true;
+      searchOpponent(false);
+    })
+    peer.on('connection', (connection: any) => {
+      conn = connection;
+      conn.on('open', function () {
+        // connectplayer = true;
+      });
+      // conn.on("data", onRecvMessage);
+      (select as any).remove();
+      // button.remove();
+      message.remove();
+      // gamemode = 0;
+      // dic = true;
+      // f = frameCount;
+    });
+  }
+
+  const searchOpponent = (is1P: boolean): void => {
+    players = [];
+    peer.listAllPeers((allPlayers: any) => {
+      for (const player of allPlayers) {
+        if (peer.id != player && player.slice(0, -5) === "shogi") {
+          players.push(player);
+        }
+      }
+
+      if (is1P) {
+        select = p.createSelect();
+        (select as any).option("対戦相手を選んでください");
+        for (const player of players) {
+          (select as any).option(player);
+          (select as any).changed(() => {
+            if (select.value() !== "対戦相手を選んでください") {
+              conn = peer.connect(select.value());
+              conn.on('data', () => { });
+              conn.on('open', () => {
+                // console.log("");
+                isSearching = true;
+                select.remove();
+                // dim.remove();
+                // button.remove();
+                // gamemode = 4;
+                // f = frameCount;
+              });
+            }
+          });
+        }
+      }
+    });
+  }
+
   const isOutOfRange = (w: number, h: number): boolean => {
     return (w < 0 || h < 0 || w >= 9 || h >= 9);
   }
