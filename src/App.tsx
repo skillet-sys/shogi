@@ -40,7 +40,7 @@ let stockOrder = [0, P, L, N, S, G, R, B];
 let isPromoting = false;
 let gameEnds = false;
 let pieces = Array(pK - P + 1);
-let stocks = Array(2).fill(0).map(() => Array(8).fill(1));
+let stocks = Array(2).fill(0).map(() => Array(8).fill(0));
 let stockIndex = 0;
 
 const sketch = (p: p5): void => {
