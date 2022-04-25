@@ -40,7 +40,7 @@ let stockOrder = [0, P, L, N, S, G, R, B];
 let isPromoting = false;
 let gameEnds = false;
 let pieces = Array(pK - P + 1);
-let stocks = Array(2).fill(0).map(() => Array(8).fill(0));
+let stocks = Array(2).fill(0).map(() => Array(8).fill(1));
 let stockIndex = 0;
 
 const sketch = (p: p5): void => {
@@ -443,13 +443,13 @@ const sketch = (p: p5): void => {
   p.mousePressed = (): void => {
     if (gameEnds || isPromoting) return;
 
-
     const r = p.floor(p.mouseX / block);
     const c = p.floor(p.mouseY / block) - 2;
 
+    const selectedIndex = c === -1 ? p.abs(r - 8) - 1 : r - 1;
     if (((turn === 1 && c === 9) || (turn === -1 && c === -1)) &&
-      stocks[p.int(turn === 1)][stockOrder[r - 1]] > 0) {
-      stockIndex = r - 1;
+      stocks[p.int(turn === 1)][stockOrder[selectedIndex]] > 0) {
+      stockIndex = selectedIndex;
       putStock();
       p.redraw();
       p.push();
@@ -477,8 +477,8 @@ const sketch = (p: p5): void => {
 
       if (!isOutOfRange(pieceX, pieceY) &&
         board[pieceY][pieceX] !== 0) {
-        if (((turn === 1 && c <= 2) || (turn === -1 && c >= 6)) &&
-          pieceType(pieceX, pieceY) <= B) {
+        if (pieceType(pieceX, pieceY) <= B &&
+          ((turn === 1 && c <= 2) || (turn === -1 && c >= 6))) {
           isPromoting = true;
           promoX = r; promoY = c;
         }
