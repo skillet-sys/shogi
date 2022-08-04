@@ -2,8 +2,26 @@ import p5 from 'p5';
 import React, { useEffect } from 'react';
 
 const App = () => {
-  return (<div className="App" ><Main /></div>);
+  return (<Main />);
 }
+
+const paths = [
+  "https://1.bp.blogspot.com/-53589yGRcUU/U82w_DNh1RI/AAAAAAAAjGU/0ve7q56YmcI/s800/syougi14_fuhyou.png",
+  "https://3.bp.blogspot.com/-DUYCLVKvQO4/U82w-FvvaZI/AAAAAAAAjGE/zju84-vpMTQ/s800/syougi12_kyousya.png",
+  "https://1.bp.blogspot.com/-Zujkkwua1iU/U82w9TIVPLI/AAAAAAAAjGM/-8QboZWuOcc/s800/syougi10_keima.png",
+  "https://4.bp.blogspot.com/-CHmBXtrO_zc/U82w8BF3O-I/AAAAAAAAjFs/eHbceViqSes/s800/syougi08_ginsyou.png",
+  "https://1.bp.blogspot.com/-52sD36-S3nQ/U82w4zREVII/AAAAAAAAjEw/HzythHxpYYM/s800/syougi03_hisya.png",
+  "https://3.bp.blogspot.com/-bq3gmx2ylTA/U82w53WmfHI/AAAAAAAAjFA/n0ha_4JYOIc/s800/syougi05_gakugyou.png",
+  "https://3.bp.blogspot.com/-ljsFK13guAo/U82w7BfkkdI/AAAAAAAAjFU/V0sajYGvgZU/s800/syougi07_kinsyou.png",
+  "https://2.bp.blogspot.com/-amjFdOxkQjI/U82w_lwHJNI/AAAAAAAAjGg/mk5j9lbp5DA/s800/syougi15_tokin.png",
+  "https://3.bp.blogspot.com/--DfrQ-6ac0E/U82w-wFYrlI/AAAAAAAAjGo/OBgDkPX6mpw/s800/syougi13_narikyou.png",
+  "https://3.bp.blogspot.com/-9gpvNiM7nrM/U82w9twJotI/AAAAAAAAjGY/FmHCAQlKgUc/s800/syougi11_narikei.png",
+  "https://3.bp.blogspot.com/-GW2BKIP77pI/U82w8XOtiJI/AAAAAAAAjFw/2ACHTS2thfQ/s800/syougi09_narigin.png",
+  "https://1.bp.blogspot.com/-5N26c_Qz-S8/U82w5qZvpwI/AAAAAAAAjFE/A0efCoYymKI/s800/syougi04_ryuuou.png",
+  "https://1.bp.blogspot.com/-n9yzuJR_EZU/U82w69_r1uI/AAAAAAAAjFY/_89I2XToJxA/s800/syougi06_ryuuma.png",
+  "https://4.bp.blogspot.com/-fFzYwmdMYPE/U82w35c5DnI/AAAAAAAAjEs/CrITxcRP29w/s150/syougi01_ousyou.png",
+  "https://2.bp.blogspot.com/-T6I2J8xV6Jo/U82w4ZPbWQI/AAAAAAAAjE8/IBiAdKwv3EA/s150/syougi02_gyokusyou.png",
+];
 
 const width = window.innerWidth;
 const height = window.innerHeight;
@@ -350,23 +368,6 @@ const sketch = (p: p5): void => {
   }
 
   p.preload = (): void => {
-    const paths = [
-      "https://1.bp.blogspot.com/-53589yGRcUU/U82w_DNh1RI/AAAAAAAAjGU/0ve7q56YmcI/s800/syougi14_fuhyou.png",
-      "https://3.bp.blogspot.com/-DUYCLVKvQO4/U82w-FvvaZI/AAAAAAAAjGE/zju84-vpMTQ/s800/syougi12_kyousya.png",
-      "https://1.bp.blogspot.com/-Zujkkwua1iU/U82w9TIVPLI/AAAAAAAAjGM/-8QboZWuOcc/s800/syougi10_keima.png",
-      "https://4.bp.blogspot.com/-CHmBXtrO_zc/U82w8BF3O-I/AAAAAAAAjFs/eHbceViqSes/s800/syougi08_ginsyou.png",
-      "https://1.bp.blogspot.com/-52sD36-S3nQ/U82w4zREVII/AAAAAAAAjEw/HzythHxpYYM/s800/syougi03_hisya.png",
-      "https://3.bp.blogspot.com/-bq3gmx2ylTA/U82w53WmfHI/AAAAAAAAjFA/n0ha_4JYOIc/s800/syougi05_gakugyou.png",
-      "https://3.bp.blogspot.com/-ljsFK13guAo/U82w7BfkkdI/AAAAAAAAjFU/V0sajYGvgZU/s800/syougi07_kinsyou.png",
-      "https://2.bp.blogspot.com/-amjFdOxkQjI/U82w_lwHJNI/AAAAAAAAjGg/mk5j9lbp5DA/s800/syougi15_tokin.png",
-      "https://3.bp.blogspot.com/--DfrQ-6ac0E/U82w-wFYrlI/AAAAAAAAjGo/OBgDkPX6mpw/s800/syougi13_narikyou.png",
-      "https://3.bp.blogspot.com/-9gpvNiM7nrM/U82w9twJotI/AAAAAAAAjGY/FmHCAQlKgUc/s800/syougi11_narikei.png",
-      "https://3.bp.blogspot.com/-GW2BKIP77pI/U82w8XOtiJI/AAAAAAAAjFw/2ACHTS2thfQ/s800/syougi09_narigin.png",
-      "https://1.bp.blogspot.com/-5N26c_Qz-S8/U82w5qZvpwI/AAAAAAAAjFE/A0efCoYymKI/s800/syougi04_ryuuou.png",
-      "https://1.bp.blogspot.com/-n9yzuJR_EZU/U82w69_r1uI/AAAAAAAAjFY/_89I2XToJxA/s800/syougi06_ryuuma.png",
-      "https://4.bp.blogspot.com/-fFzYwmdMYPE/U82w35c5DnI/AAAAAAAAjEs/CrITxcRP29w/s150/syougi01_ousyou.png",
-      "https://2.bp.blogspot.com/-T6I2J8xV6Jo/U82w4ZPbWQI/AAAAAAAAjE8/IBiAdKwv3EA/s150/syougi02_gyokusyou.png",
-    ];
     for (let i = P; i <= pK; i++) {
       pieces[i] = p.loadImage(paths[i - 1]);
     }

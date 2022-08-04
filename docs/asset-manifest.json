@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/shogi/static/css/main.e6c13ad2.css",
+    "main.js": "/shogi/static/js/main.57b9f9ca.js",
+    "static/js/787.0f2deac4.chunk.js": "/shogi/static/js/787.0f2deac4.chunk.js",
+    "index.html": "/shogi/index.html",
+    "main.e6c13ad2.css.map": "/shogi/static/css/main.e6c13ad2.css.map",
+    "main.57b9f9ca.js.map": "/shogi/static/js/main.57b9f9ca.js.map",
+    "787.0f2deac4.chunk.js.map": "/shogi/static/js/787.0f2deac4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.57b9f9ca.js"
+  ]
+}
